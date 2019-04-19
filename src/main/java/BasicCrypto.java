@@ -73,11 +73,12 @@ public class BasicCrypto {
 
         String key = "플레이코인";
         String text = "오늘은이더리움연속전송에관하여논의했습니다";
+        System.out.println("Key: " + key);
+        System.out.println("Plain text: " + text);
 
         List<Integer> keys = getKeys(key);
-        System.out.println(keys);
         String encText = getEncText(keys, text);
-        System.out.println(encText);
+        System.out.println("Encoded text: " + encText);
     }
 
     /**
@@ -92,6 +93,13 @@ public class BasicCrypto {
         return Arrays.stream(sorted.split("|")).map(key::indexOf).collect(Collectors.toList());
     }
 
+    /**
+     * 잘라서 나열된 텍스트를 키의 순번대로 다시 재조합 한다.
+     *
+     * @param keys
+     * @param text
+     * @return
+     */
     private static String getEncText(List<Integer> keys, String text) {
         int kLen = keys.size();
         List<String> texts = getTexts(kLen, text);
@@ -111,6 +119,13 @@ public class BasicCrypto {
         return full.toString();
     }
 
+    /**
+     * 키의 크기만큼 텍스트를 잘라서 나열한다.
+     *
+     * @param kLen
+     * @param text
+     * @return
+     */
     private static List<String> getTexts(int kLen, String text) {
         int tLen = text.length();
         List<String> texts = Lists.newArrayList();
